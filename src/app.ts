@@ -7,6 +7,7 @@ import rateLimit from 'express-rate-limit';
 import routes from './routes/scrapping.routes'
 import { verifyApiKey } from './middlewares/auth.middleware'
 import { executeScrapping } from './tasks/scrapping.task'
+import { envs } from './config/envs';
 
 const BASE_API_URL = '/api'
 const app = express()
@@ -23,6 +24,6 @@ app.use(morgan('dev'))
 
 app.use(`${BASE_API_URL}`, verifyApiKey, routes)
 
-cron.schedule('*/15 * * * *', executeScrapping)
+cron.schedule(`*/${envs.scrappingFrequencyMinutes} * * * *`, executeScrapping)
 
 export default app

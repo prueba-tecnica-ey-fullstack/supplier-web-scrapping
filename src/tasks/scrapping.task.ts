@@ -3,7 +3,7 @@ import { ItemResult } from "../types"
 import db from "../db"
 
 export const executeScrapping = async () => {
-  console.log('Scrapping....')
+  console.log(`[${new Date().toISOString()}] Scrapping....`)
 
   const browser = await chromium.launch({
     headless: true

@@ -5,11 +5,13 @@ import * as joi from 'joi'
 interface EnvVars {
   PORT: number
   API_KEY: string
+  SCRAPPING_FREQUENCY_MINUTES: number
 }
 
 const envSchema = joi.object({
   PORT: joi.number().required(),
-  API_KEY: joi.string().required()
+  API_KEY: joi.string().required(),
+  SCRAPPING_FREQUENCY_MINUTES: joi.number()
 })
   .unknown(true)
 
@@ -23,5 +25,6 @@ const envVars: EnvVars = value
 
 export const envs = {
   port: envVars.PORT,
-  apiKey: envVars.API_KEY
+  apiKey: envVars.API_KEY,
+  scrappingFrequencyMinutes: envVars.SCRAPPING_FREQUENCY_MINUTES ?? 15
 }
